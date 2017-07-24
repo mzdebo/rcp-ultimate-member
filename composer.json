@@ -1,0 +1,27 @@
+{
+  "name": "skillfulplugins/rcp-ultimate-member",
+  "type": "wordpress-plugin",
+  "description": "Integrate RCP subscriptions with Ultimate Member",
+  "keywords": [
+    "rcp",
+    "ultimate-member"
+  ],
+  "homepage": "https://skilledcode.com/plugins/rcp-ultimate-member",
+  "authors": [
+    {
+      "name": "Tanner Moushey",
+      "email": "tanner@iwitnessdesign.com",
+      "homepage": "https://skilledcode.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "composer/installers": "~1.0.6",
+    "skillfulplugins/toolbox": "^1.0.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "RCP_UM\\": "includes/"
+    }
+  }
+}
