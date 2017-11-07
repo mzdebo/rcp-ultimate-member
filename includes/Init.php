@@ -52,10 +52,7 @@ class Init {
 	/**
 	 * Actions and Filters
 	 */
-	protected function actions() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
-		add_action( 'wp_footer', array( $this, 'print_scripts' ), 11 );
-	}
+	protected function actions() {}
 
 	/** Actions **************************************/
 
@@ -63,7 +60,7 @@ class Init {
 	 * Required Plugins notice
 	 */
 	public function required_plugins() {
-		printf( '<div class="error"><p>%s</p></div>', __( 'Restrict Content Pro is required for the Restrict Content Pro - Ultimate Member add-on to function.', 'rcp-ultimate-member' ) );
+		printf( '<div class="error"><p>%s</p></div>', __( 'Restrict Content Pro and Ultimate Member are required for the Restrict Content Pro - Ultimate Member add-on to function.', 'rcp-ultimate-member' ) );
 	}
 
 	/** Helper Methods **************************************/
@@ -78,7 +75,7 @@ class Init {
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 
-		if ( is_plugin_active( 'restrict-content-pro/restrict-content-pro.php' ) ) {
+		if ( defined( 'RCP_PLUGIN_DIR' ) && class_exists( 'UM_API' ) ) {
 			return true;
 		}
 

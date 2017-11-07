@@ -143,7 +143,6 @@ class UltimateMember {
 
 		<?php
 		echo do_shortcode( '[subscription_details]' );
-		echo do_shortcode( '[rcp_update_card]' );
 	}
 
 }
