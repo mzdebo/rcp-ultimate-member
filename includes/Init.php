@@ -52,10 +52,7 @@ class Init {
 	/**
 	 * Actions and Filters
 	 */
-	protected function actions() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
-		add_action( 'wp_footer', array( $this, 'print_scripts' ), 11 );
-	}
+	protected function actions() {}
 
 	/** Actions **************************************/
 
