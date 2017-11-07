@@ -75,7 +75,7 @@ class Init {
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 
-		if ( defined( 'RCP_PLUGIN_DIR' ) && class_exists( 'UM_API' ) ) {
+		if ( defined( 'RCP_PLUGIN_DIR' ) ) {
 			return true;
 		}
 
