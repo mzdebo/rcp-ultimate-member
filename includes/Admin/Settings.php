@@ -80,7 +80,9 @@ class Settings {
 								<?php wp_nonce_field( 'rcpum_deactivate_license', 'rcpum_deactivate_license' ); ?>
 								<?php submit_button( 'Deactivate License', 'secondary', 'rcpum_license_deactivate', false ); ?>
 								<span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'rcp-ultimate-member' ); ?></span>
-							<?php else : ?>
+							<?php elseif( 'invalid' == $status ) : ?>
+								<?php echo $status; ?>
+							<?php elseif( $license ) : ?>
 								<?php submit_button( 'Activate License', 'secondary', 'rcpum_license_activate', false ); ?>
 							<?php endif; ?></p>
 
