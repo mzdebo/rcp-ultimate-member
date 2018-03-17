@@ -46,7 +46,12 @@ class Init {
 	 */
 	protected function includes() {
 		Admin\Init::get_instance();
-		UltimateMember::get_instance();
+
+		if ( ultimatemember_version < 2 ) {
+			UltimateMember::get_instance();
+		} else {
+			UltimateMember2::get_instance();
+		}
 	}
 
 	/**
@@ -75,7 +80,7 @@ class Init {
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 
-		if ( defined( 'RCP_PLUGIN_DIR' ) && class_exists( 'UM_API' ) ) {
+		if ( defined( 'RCP_PLUGIN_DIR' ) && defined( 'ultimatemember_version' ) ) {
 			return true;
 		}
 

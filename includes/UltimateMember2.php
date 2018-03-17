@@ -4,7 +4,7 @@ namespace RCP_UM;
 
 use RCP_Member;
 
-class UltimateMember {
+class UltimateMember2 {
 
 	/**
 	 * @var
@@ -17,12 +17,12 @@ class UltimateMember {
 	public static $_expired_status = 'expired';
 
 	/**
-	 * Only make one instance of UltimateMember
+	 * Only make one instance of UltimateMember2
 	 *
-	 * @return UltimateMember
+	 * @return UltimateMember2
 	 */
 	public static function get_instance() {
-		if ( ! self::$_instance instanceof UltimateMember ) {
+		if ( ! self::$_instance instanceof UltimateMember2 ) {
 			self::$_instance = new self();
 		}
 
@@ -33,11 +33,10 @@ class UltimateMember {
 	 * Add Hooks and Actions
 	 */
 	protected function __construct() {
-		add_action( 'rcp_set_status',          array( $this, 'set_member_status' ), 10, 3 );
-		add_action( 'um_after_header_meta',    array( $this, 'suspended_profile' ), 8 );
+		add_action( 'rcp_set_status', array( $this, 'set_member_status' ), 10, 3 );
+		add_action( 'um_after_header_meta', array( $this, 'suspended_profile' ), 8 );
 		add_filter( 'um_account_page_default_tabs_hook', array( $this, 'account_menu' ), 11 );
-		add_action( 'um_account_tab__subscription', array( $this, 'account_page' ) );
-
+		add_action( 'um_account_content_hook_subscription', array( $this, 'account_page' ) );
 	}
 
 	/**
@@ -47,13 +46,12 @@ class UltimateMember {
 	 * @param $user_id
 	 * @param $old_status
 	 *
-	 * @since  1.0.0
+	 * @since  1.1.0
 	 *
 	 * @author Tanner Moushey
 	 */
 	public function set_member_status( $new_status, $user_id, $old_status ) {
-		global $ultimatemember;
-		$ultimatemember->user->set( $user_id );
+		um_fetch_user( $user_id );
 
 		$um_status = um_user( 'account_status' );
 
@@ -67,16 +65,17 @@ class UltimateMember {
 
 		// if the user no longer has an active membership, unapprove
 		if ( ! $is_active && 'approved' == $um_status ) {
-			$ultimatemember->user->set_status( self::$_expired_status );
+			UM()->user()->set_status( self::$_expired_status );
 			return;
 		}
 
 		if ( $is_active && 'approved' != $um_status ) {
 			// set to 'awaiting_admin_review' so that we send the Approved email not the Welcome email
-			$ultimatemember->user->set_status( 'awaiting_admin_review' );
-			$ultimatemember->user->approve();
+			UM()->user()->set_status( 'awaiting_admin_review' );
+			UM()->user()->approve();
 		}
 
+		um_reset_user();
 	}
 
 	/**
@@ -103,7 +102,7 @@ class UltimateMember {
 		$message = __( 'This account has expired.', 'rcp-ultimate-member' );
 
 		if ( um_is_myprofile() ) {
-			$message .= sprintf( __( ' Update your <a href="%s">payment information</a>a to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page('account' ) . 'subscription' );
+			$message .= sprintf( __( ' Update your <a href="%s">payment information</a> to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page('account' ) . 'subscription' );
 		}
 
 		echo apply_filters( 'rcpum_expired_member_message', sprintf( '<div class="um-field-error">%s</div>', $message ), $args );
@@ -114,7 +113,7 @@ class UltimateMember {
 	 *
 	 * @param $tabs
 	 *
-	 * @since  1.0.0
+	 * @since  1.1.0
 	 *
 	 * @return mixed
 	 * @author Tanner Moushey
@@ -125,6 +124,7 @@ class UltimateMember {
 			'icon'   => 'um-icon-card',
 			'title'  => __( 'Subscription', 'rcp-ultimate-member' ),
 			'custom' => true,
+			'show_button' => false,
 		);
 
 		return $tabs;
@@ -135,16 +135,22 @@ class UltimateMember {
 	 *
 	 * @param $info
 	 *
-	 * @since  1.0.0
+	 * @since  1.1.0
 	 *
 	 * @author Tanner Moushey
+	 *
+	 * @return string
 	 */
-	public function account_page( $info ) { ?>
+	public function account_page( $info ) {
+		 ob_start(); ?>
+
 		<div class="um-account-heading uimob340-hide uimob500-hide"><i class="<?php echo $info['icon']; ?>"></i><?php echo $info['title']; ?></div>
 		<hr />
 
 		<?php
 		echo do_shortcode( '[subscription_details]' );
+		echo do_shortcode( '[rcp_update_card]' );
+		return ob_get_clean();
 	}
 
 }
