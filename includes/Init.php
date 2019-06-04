@@ -80,7 +80,7 @@ class Init {
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
 
-		if ( defined( 'RCP_PLUGIN_DIR' ) && defined( 'ultimatemember_version' ) ) {
+		if ( is_plugin_active( 'restrict-content-pro/restrict-content-pro.php' ) && defined( 'ultimatemember_version' ) ) {
 			return true;
 		}
 
