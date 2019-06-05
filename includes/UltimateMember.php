@@ -103,7 +103,7 @@ class UltimateMember {
 		$message = __( 'This account has expired.', 'rcp-ultimate-member' );
 
 		if ( um_is_myprofile() ) {
-			$message .= sprintf( __( ' Update your <a href="%s">payment information</a>a to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page('account' ) . 'subscription' );
+			$message .= sprintf( __( ' Update your <a href="%s">payment information</a> to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page('account' ) . 'subscription' );
 		}
 
 		echo apply_filters( 'rcpum_expired_member_message', sprintf( '<div class="um-field-error">%s</div>', $message ), $args );
