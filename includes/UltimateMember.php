@@ -2,8 +2,6 @@
 
 namespace RCP_UM;
 
-use RCP_Member;
-
 class UltimateMember {
 
 	/**
@@ -57,8 +55,7 @@ class UltimateMember {
 
 		$um_status = um_user( 'account_status' );
 
-		$member = new RCP_Member( $user_id );
-		$is_active = ( ! $member->is_expired() && in_array( $member->get_status(), array( 'active', 'cancelled', 'free' ) ) );
+		$is_active = rcp_user_has_active_membership( $user_id );
 
 		// everything is as it should be
 		if ( $is_active && 'approved' == $um_status ) {
