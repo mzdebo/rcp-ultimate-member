@@ -103,7 +103,7 @@ class License {
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( RCPTX_STORE_URL, array(
+		$response = wp_remote_post( RCP_ULTIMATE_MEMBER_STORE_URL, array(
 			'timeout'   => 15,
 			'sslverify' => false,
 			'body'      => $api_params
