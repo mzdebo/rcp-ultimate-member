@@ -20,7 +20,7 @@ if ( !defined( 'RCP_ULTIMATE_MEMBER_PLUGIN_FILE' ) ) {
 	define( 'RCP_ULTIMATE_MEMBER_PLUGIN_FILE', __FILE__ );
 }
 if ( !defined( 'RCP_ULTIMATE_MEMBER_PLUGIN_VERSION' ) ) {
-	define( 'RCP_ULTIMATE_MEMBER_PLUGIN_VERSION', '1.2.0' );
+	define( 'RCP_ULTIMATE_MEMBER_PLUGIN_VERSION', '1.3.0' );
 }
 
 // EDD Licensing constants
@@ -56,7 +56,7 @@ function rcp_ultimate_member_load_textdomain() {
 
 	$get_locale = get_locale();
 
-	if ( function_exists( 'rcp_compare_wp_version' ) && rcp_compare_wp_version( 4.7 ) ) {
+	if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) ) {
 		$get_locale = get_user_locale();
 	}
 

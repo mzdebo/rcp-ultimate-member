@@ -1,0 +1,96 @@
+# Copyright (C) 2019 Skillful Plugins
+# This file is distributed under the same license as the Restrict Content Pro - Ultimate Member package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Restrict Content Pro - Ultimate Member 1.2.0\n"
+"Report-Msgid-Bugs-To: https://skilledcode.com/support/\n"
+"POT-Creation-Date: 2019-07-23 16:43:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: SkilledCode <support@iwitnessdesign.com>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+
+#: includes/Admin/Settings.php:54
+msgid "Ultimate Member Settings"
+msgstr ""
+
+#: includes/Admin/Settings.php:54
+msgid "Ultimate Member"
+msgstr ""
+
+#: includes/Admin/Settings.php:62
+msgid "Options saved"
+msgstr ""
+
+#: includes/Admin/Settings.php:75
+msgid "License Key"
+msgstr ""
+
+#: includes/Admin/Settings.php:82
+msgid "active"
+msgstr ""
+
+#: includes/Admin/Settings.php:89
+msgid ""
+"Enter your Restrict Content Pro - Ultimate Member license key. This is "
+"required for automatic updates and <a href=\"%s\">support</a>."
+msgstr ""
+
+#: includes/Init.php:68
+msgid ""
+"Restrict Content Pro and Ultimate Member are required for the Restrict "
+"Content Pro - Ultimate Member add-on to function."
+msgstr ""
+
+#: includes/UltimateMember.php:114 includes/UltimateMember2.php:113
+msgid "This account has expired."
+msgstr ""
+
+#: includes/UltimateMember.php:117 includes/UltimateMember2.php:116
+msgid ""
+" Update your <a href=\"%s\">payment information</a> to re-activate your "
+"account."
+msgstr ""
+
+#: includes/UltimateMember.php:137 includes/UltimateMember2.php:136
+msgid "Subscription"
+msgstr ""
+
+#: includes/updater.php:176
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" "
+"class=\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+
+#: includes/updater.php:183
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" "
+"class=\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a "
+"href=\"%4$s\">update now</a>."
+msgstr ""
+
+#: includes/updater.php:323
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/updater.php:323
+msgid "Error"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Integrate RCP subscriptions with Ultimate Member"
+msgstr ""

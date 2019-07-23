@@ -31,8 +31,8 @@ class UltimateMember {
 	 * Add Hooks and Actions
 	 */
 	protected function __construct() {
-		add_action( 'rcp_set_status',          array( $this, 'set_member_status' ), 10, 3 );
-		add_action( 'um_after_header_meta',    array( $this, 'suspended_profile' ), 8 );
+		add_action( 'rcp_transition_membership_status', array( $this, 'set_member_status' ), 10, 3 );
+		add_action( 'um_after_header_meta', array( $this, 'suspended_profile' ), 8 );
 		add_filter( 'um_account_page_default_tabs_hook', array( $this, 'account_menu' ), 11 );
 		add_action( 'um_account_tab__subscription', array( $this, 'account_page' ) );
 
@@ -40,7 +40,7 @@ class UltimateMember {
 
 	/**
 	 * Update Ultimate Member status when RCP status changes
-	 * 
+	 *
 	 * @param $new_status
 	 * @param $user_id
 	 * @param $old_status
@@ -49,13 +49,26 @@ class UltimateMember {
 	 *
 	 * @author Tanner Moushey
 	 */
-	public function set_member_status( $new_status, $user_id, $old_status ) {
+	public function set_member_status( $old_status, $new_status, $membership_id ) {
+
+		$membership = rcp_get_membership( $membership_id );
+
+		if ( ! $membership ) {
+			return;
+		}
+
+		$customer = $membership->get_customer();
+
+		if ( ! $customer ) {
+			return;
+		}
+
 		global $ultimatemember;
-		$ultimatemember->user->set( $user_id );
+		$ultimatemember->user->set( $customer->get_user_id() );
 
 		$um_status = um_user( 'account_status' );
 
-		$is_active = rcp_user_has_active_membership( $user_id );
+		$is_active = rcp_user_has_active_membership( $customer->get_user_id() );
 
 		// everything is as it should be
 		if ( $is_active && 'approved' == $um_status ) {
@@ -65,6 +78,7 @@ class UltimateMember {
 		// if the user no longer has an active membership, unapprove
 		if ( ! $is_active && 'approved' == $um_status ) {
 			$ultimatemember->user->set_status( self::$_expired_status );
+
 			return;
 		}
 
@@ -93,14 +107,14 @@ class UltimateMember {
 
 		if ( ! um_is_on_edit_profile() ) {
 			global $wp_filter;
-			unset( $wp_filter[ 'um_profile_content_main' ] );
-			unset( $wp_filter[ 'um_profile_content_main_default' ] );
+			unset( $wp_filter['um_profile_content_main'] );
+			unset( $wp_filter['um_profile_content_main_default'] );
 		}
 
 		$message = __( 'This account has expired.', 'rcp-ultimate-member' );
 
 		if ( um_is_myprofile() ) {
-			$message .= sprintf( __( ' Update your <a href="%s">payment information</a> to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page('account' ) . 'subscription' );
+			$message .= sprintf( __( ' Update your <a href="%s">payment information</a> to re-activate your account.', 'rcp-ultimate-member' ), um_get_core_page( 'account' ) . 'subscription' );
 		}
 
 		echo apply_filters( 'rcpum_expired_member_message', sprintf( '<div class="um-field-error">%s</div>', $message ), $args );
@@ -111,9 +125,9 @@ class UltimateMember {
 	 *
 	 * @param $tabs
 	 *
+	 * @return mixed
 	 * @since  1.0.0
 	 *
-	 * @return mixed
 	 * @author Tanner Moushey
 	 */
 	public function account_menu( $tabs ) {
@@ -137,8 +151,11 @@ class UltimateMember {
 	 * @author Tanner Moushey
 	 */
 	public function account_page( $info ) { ?>
-		<div class="um-account-heading uimob340-hide uimob500-hide"><i class="<?php echo $info['icon']; ?>"></i><?php echo $info['title']; ?></div>
-		<hr />
+        <div class="um-account-heading uimob340-hide uimob500-hide">
+            <i class="<?php echo $info['icon']; ?>"></i>
+			<?php echo $info['title']; ?>
+        </div>
+        <hr/>
 
 		<?php
 		echo do_shortcode( '[subscription_details]' );
