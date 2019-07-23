@@ -3,7 +3,7 @@
  * Plugin Name: Restrict Content Pro - Ultimate Member
  * Plugin URL: https://skillfulplugins.com/plugins/rcp-ultimate-member
  * Description: Integrate RCP subscriptions with Ultimate Member
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Skillful Plugins
  * Author URI: https://skillfulplugins.com
  * Text Domain: rcp-ultimate-member
